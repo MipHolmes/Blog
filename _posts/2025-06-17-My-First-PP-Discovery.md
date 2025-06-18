@@ -1,12 +1,11 @@
 ---
 title: "My First Prototype Pollution Discovery"
-date: 2025-06-18T18:44Z
+date: 2025-06-17T18:44Z
 categories:
   - blog
 tags:
   - client-side exploit
   - web app security
-  - 
 ---
 
 In my very first blog post I'll be providing an overview of a finding during a recent offensive engagement. 
