@@ -20,7 +20,7 @@ But what is prototype pollution?
 
 Prototype pollution (PP) is a vulnerability when an attacker injects arbitrary data into a JavaScript object prototype. This generally occurs when JavaScript functions fail to sanitize object keys before merging them with another object, resulting in a modified prototype that the object inherits from. Consequently, this can lead to authentication bypasses, DoS, and logic bombs (all in an effectively chained attack, likely with XSS). We need to know what objects, properties, and prototypes are to better understand this vuln and its implications. Casually speaking, an object is an item you create in JavaScript, e.g., Shirt, which contains any number of *properties*. Properties are attributes the object has, e.g, size, material, color. Prototypes are special toolkits that objects inherit their properties and methods from (object.prototype). 
 
-There are three factors essential for this vulnerability to be exploited are: A user-controllable input, a sink, and a weak gadget.
+There are three factors essential for this vulnerability to be exploited: A user-controllable input, a sink, and a weak gadget.
  
 ・User-controllable input: URL, text forms, JSON input, etc.
 
