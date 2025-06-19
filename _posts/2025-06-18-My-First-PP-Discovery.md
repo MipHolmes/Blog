@@ -59,6 +59,7 @@ The output served as confirmation that the prototype of all plain objects were p
 Let's understand the payload I used:
 
 1) JSON.parse('{ "__proto__": { "attacker": "yes" } }')
+
    - Parses a JSON object with a __proto__ key:
 
 {
@@ -78,6 +79,7 @@ Let's understand the payload I used:
 
 4) console.log({}.attacker)
    - Logs "yes" — indicating the prototype pollution succeeded.
+
 
 
 All in all, PP is like pouring a can of food coloring into a small pond — a seemingly minor action with wide-reaching, hard-to-contain consequences. A polluted prototype silently alters the behavior of objects app-wide, often in ways developers don’t anticipate.
