@@ -47,7 +47,7 @@ The vuln centers on jQuery's .extend() method. When used in this manner:
 ```javascript
 $.extend(true, {}, userInput);
 ```
-Thus, userInput is JSON-parsed from a user-controllable resource such as a request body. This is because in jQuery versions <3.4.0, extend() did not block PP via the __proto__ key.
+Thus, userInput is JSON-parsed from a user-controllable resource such as a request body. This is because in jQuery versions <3.4.0, extend() did not block PP via the __ proto __ key.
 
 ## <ins>My Proof-of-Concept</ins>
 
@@ -70,7 +70,7 @@ Let's understand the payload I used:
 
 1) JSON.parse('{ "__proto__": { "attacker": "yes" } }')
 
-   - Parses a JSON object with a "___proto___" key:
+   - Parses a JSON object with a __ proto __ key:
 
 {
   __proto__: {
