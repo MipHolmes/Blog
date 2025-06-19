@@ -70,7 +70,7 @@ Let's understand the payload I used:
 
 1) JSON.parse('{ "__proto__": { "attacker": "yes" } }')
 
-   - Parses a JSON object with a __proto__ key:
+   - Parses a JSON object with a "_proto_" key:
 
 {
   __proto__: {
