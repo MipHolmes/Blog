@@ -24,7 +24,7 @@ There are three factors essential for this vulnerability to be exploited: A user
  
 ・User-controllable input: URL, text forms, JSON input, etc.
 
-・Sinks: These are functions or DOM elements that allow you to inject malicious properties, i.e., where the pollution occurs. For example:
+・Sinks: These are functions or DOM elements that allow you to inject or "merge" malicious properties, i.e., where the pollution occurs. For example:
 
 ```javascript
 if (user.isAdmin) {
@@ -64,7 +64,7 @@ Evaluates
 >>> yes
 ```
 
-The output served as confirmation that the prototype of all plain objects were polluted. I also received a runtime error — Uncaught TypeError: cannot use 'in' operator to search for "set" in "yes." The runtime error was a subtle clue, indicating that internal code paths were interacting with the polluted prototype. If time allowed, this would be the thread to pull on to locate an actual gadget.
+The output served as confirmation that the prototype of all plain objects was polluted. I also received a runtime error — Uncaught TypeError: cannot use 'in' operator to search for "set" in "yes." The runtime error was a subtle clue, indicating that internal code paths were interacting with the polluted prototype. If time allowed, this would be the thread to pull on to locate an actual gadget.
 
 Let's understand the payload I used:
 
@@ -84,7 +84,7 @@ Let's understand the payload I used:
    - The {} target is merged with the parsed object.
 
 3) What actually happens:
-   - The prototype of all objects is polluted by assigning to __proto__.
+   - The prototype of all objects is polluted by assigning to __proto__, which is an accessor property that allows you to access or modify the prototype of an object, which determines its inheritance chain.
    - {}.attacker → inherited from Object.prototype.
 
 4) console.log({}.attacker)
