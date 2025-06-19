@@ -40,18 +40,18 @@ We can make ourselves admins, allowing us to see the admin panel:
 ・Weak Gadgets: Pieces of application code (or third-party libraries) that use polluted properties in dangerous ways, usually without verifying where the property came from (own vs inherited).
 
 
-<ins>## CVE-2019-11358: Vulnerable jQuery Merge</ins>
+## <ins>CVE-2019-11358: Vulnerable jQuery Merge</ins>
 
 The vuln centers on jQuery's .extend() method. When used in this manner:
 
 ```javascript
 $.extend(true, {}, userInput);
 ```
-Thus userInput is JSON-parsed from a user-controllable resource such as a request body. This is because in jQuery versions <3.4.0, extend(), did not block PP via the __proto__ key.
+Thus, userInput is JSON-parsed from a user-controllable resource such as a request body. This is because in jQuery versions <3.4.0, extend() did not block PP via the __proto__ key.
 
-<ins>## My Proof-of-Concept</ins>
+## <ins>My Proof-of-Concept</ins>
 
-So I know my pollution vector is jQuery.extend(true, {}, ...), and my sink is located in the source code, but where in the application can users control input? How do I identify a weak gadget? I tried the URL, login and 'contact us' forms, but no success. Identifying a gadget was out of the picture because of being timeboxed (gotta love compliance-driven pen testing). So I cut corners and decided to inject input into the developer console for a basic demonstration of polluting the site's prototype. 
+So I know my pollution vector is jQuery.extend(true, {}, ...), and my sink is located in the source code, but where can users control input in the application? How do I identify a weak gadget? I tried the URL, login and 'contact us' forms, but no success. Identifying a gadget eventually faded from the picture because of being timeboxed (gotta love compliance-driven pen testing). So I cut corners and decided to inject input into the developer console for a basic demonstration of polluting the application's prototype. 
 
 ```javascript
 $.extend(true, {}, JSON.parse('{ "__proto__": { "attacker": "yes" } }' )); 
@@ -64,7 +64,7 @@ Evaluates
 >>> yes
 ```
 
-The output served as confirmation that the prototype of all plain objects were polluted. I also received a runtime error — Uncaught TypeError: cannot use 'in' operator to search for "set" in "yes." The runtime error was a subtle clue — indicating that internal code paths were interacting with the polluted prototype. If time allowed, this would be the thread to pull on to locate an actual gadget.
+The output served as confirmation that the prototype of all plain objects were polluted. I also received a runtime error — Uncaught TypeError: cannot use 'in' operator to search for "set" in "yes." The runtime error was a subtle clue, indicating that internal code paths were interacting with the polluted prototype. If time allowed, this would be the thread to pull on to locate an actual gadget.
 
 Let's understand the payload I used:
 
