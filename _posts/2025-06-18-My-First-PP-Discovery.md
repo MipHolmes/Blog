@@ -23,6 +23,7 @@ Prototype pollution (PP) is a vulnerability when an attacker injects arbitrary d
 There are three factors essential for this vulnerability to be exploited are: A user-controllable input, a sink, and a weak gadget.
  
 ・User-controllable input: URL, text forms, JSON input, etc.
+
 ・Sinks: These are functions or DOM elements that allow you to inject malicious properties. For example:
 
 ```javascript
