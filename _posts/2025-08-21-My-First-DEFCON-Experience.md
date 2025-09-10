@@ -21,13 +21,13 @@ This was the very first talk that I attended, and needless to say, I'm glad I di
 
 Many Azure resources have subdomain names that can be enumerated. Their naming conventions can be attributed through DNS hostname enumeration, though this does not always prove the exact ownership of these resources. If a tester can properly enumerate a target's environment, whether it's through certificate transparency reports, bruteforcing with wordlists to find public DNS records, or with open source solutions like Google Cache or VirusTotal, they may uncover Azure Tenant IDs. The tenant ID is a unique string that refers to a specific organization and is what the authentication framework, OpenIDConnect, refers to.
 
-`` https://login.microsoftonline.com/{tenant-id}/v2.0
+```https://login.microsoftonline.com/{tenant-id}/.well-known/openid-configuration```
 
  We, as attackers, have no certainty as to who to attribute particular Azure resources to, with every resource having a different enumeration technique (e.g., subdomain enumeration for Key Vaults, SharePoint, and Storage Accounts, or directory enumeration for Azure DevOps) and attribution methods through HTTP headers (WWW-Authenticate for Key Vault and Storage Accounts, x-report-to for SharePoint). Specially crafted HTTP responses will reveal the tenant ID in the response, but from an attacker's perspective, we have no way to attribute this value to an organization.
 
  Fear not, this request parameter returns the organization associated with the supplied tenantID when queried in Microsoft Graph:
 
- `` https.graph.microsoft.com**/v1.0/tenantRelationships/findTenantInformationByTenantId(tenantId='<value>)**
+ ```https.graph.microsoft.com**/v1.0/tenantRelationships/findTenantInformationByTenantId(tenantId='<value>)**```
  
 Consequently, the NetSPI team has developed a Python tool to enumerate and attribute Azure resources at scale. "For every resource that it finds attribution for, the tool stores a timestamped record in a local SQLite database (azure_tenants.db). The tool also allows for CSV, JSON, and HTML output of the results." The HTML output option provides a neat interface that can serve as a helpful discovery and attribution tool for engagements.
 
