@@ -1,6 +1,6 @@
 ---
 title: "Web App Pentesting and Bug Bounty Aren't the Same"
-date: "2026-04-24T03:05Z
+date: "2026-04-24T03:05Z"
 categories: 
   - blog
 tags:
