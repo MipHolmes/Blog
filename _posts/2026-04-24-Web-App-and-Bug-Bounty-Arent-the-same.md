@@ -23,4 +23,5 @@ I've noticed the rigidity in Bug Bounty scopes, but never quite put two and two 
 
 
 <img width="700" height="428" alt="image" src="https://github.com/user-attachments/assets/415b3310-7e14-4eb9-a473-7bcd71722ac2" />
+
 > When you realize that you spent too much time on an informational vulnerability
